@@ -291,7 +291,7 @@ namespace ConsoleExcavate
         }
         private static void GetPock()
         {
-            ProcessLog log = new ProcessLog("pockLog");
+            ProcessLog log = new ProcessLog("pockLog\\");
             while (true)
             {
                 try
@@ -308,17 +308,15 @@ namespace ConsoleExcavate
                         context += p.Num + "-" + p.Col + "\t";
                         if ((i + 1) % 13 == 0)
                         {
-                            list.Add(context);
+                            Console.WriteLine(context);
                             context = string.Empty;
                         }
                     }
-                    list.ForEach(e => {
-                        Console.WriteLine(e);
-                    });
                     if (Console.ReadLine().ToUpper() == "CLOSE") break;
                 }
                 catch (Exception ex)
                 {
+                    log.Logger.Error("Error: " + ex.Message);
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MyLibrary.Utile.PLog;
 
 namespace ConsoleExcavate.service
 {
     public class DZPockService
     {
+        private ProcessLog log = new ProcessLog("pockLog\\");
         private readonly int allNum = 52;
         private Queue<DZPockModule> queuePock;
         private Queue<DZPockModule> queueCutL;
@@ -38,9 +40,16 @@ namespace ConsoleExcavate.service
                 GetPockInit();
                 //
                 GetCutOInT();
-                //
                 GetShuffle();
                 //
+                GetCutOInT();
+                GetShuffle();
+                //
+                GetCutOInT();
+                GetShuffle();
+                //
+                GetCut();
+                GetCut();
                 GetCut();
             }
             catch (Exception ex)
@@ -54,55 +63,65 @@ namespace ConsoleExcavate.service
         {
 
             var successively = rd.Next(1, 3);
-            if (successively % 2 > 0)
+            try
             {
-                var f = listShuffleL.Count > listShuffleR.Count ? listShuffleL.Count : listShuffleR.Count;
-                for (int i = 0; i < f; i++)
+                if (successively % 2 > 0)
                 {
-                    if (listShuffleL.Count > i)
+                    var f = listShuffleL.Count > listShuffleR.Count ? listShuffleL.Count : listShuffleR.Count;
+                    for (int i = 0; i < f; i++)
                     {
-                        for (int iL = 0; iL < listShuffleL[i]; iL++)
+                        if (listShuffleL.Count - 1 > i)
                         {
-                            var shuffleL = queueCutL.Dequeue();
-                            queuePock.Enqueue(shuffleL);
+                            for (int iL = 0; iL < listShuffleL[i]; iL++)
+                            {
+                                var shuffleL = queueCutL.Dequeue();
+                                queuePock.Enqueue(shuffleL);
+                            }
+                        }
+                        if (listShuffleR.Count - 1 > i)
+                        {
+                            for (int iR = 0; iR < listShuffleR[i]; iR++)
+                            {
+                                var shuffleR = queueCutR.Dequeue();
+                                queuePock.Enqueue(shuffleR);
+                            }
                         }
                     }
-                    if (listShuffleR.Count > i)
+                }
+                else
+                {
+                    var f = listShuffleL.Count > listShuffleR.Count ? listShuffleL.Count : listShuffleR.Count;
+                    for (int i = 0; i < f; i++)
                     {
-                        for (int iR = 0; iR < listShuffleR[i]; iR++)
+                        if (listShuffleR.Count - 1 >= i)
                         {
-                            var shuffleR = queueCutR.Dequeue();
-                            queuePock.Enqueue(shuffleR);
+                            for (int iR = 0; iR < listShuffleR[i]; iR++)
+                            {
+                                var shuffleR = queueCutR.Dequeue();
+                                queuePock.Enqueue(shuffleR);
+                            }
+                        }
+                        if (listShuffleL.Count - 1 >= i)
+                        {
+                            for (int iL = 0; iL < listShuffleL[i]; iL++)
+                            {
+                                var shuffleL = queueCutL.Dequeue();
+                                queuePock.Enqueue(shuffleL);
+                            }
                         }
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                var f = listShuffleL.Count > listShuffleR.Count ? listShuffleL.Count : listShuffleR.Count;
-                for (int i = 0; i < f; i++)
-                {
-                    if (listShuffleR.Count >= i)
-                    {
-                        for (int iR = 0; iR < listShuffleR[i]; iR++)
-                        {
-                            var shuffleR = queueCutR.Dequeue();
-                            queuePock.Enqueue(shuffleR);
-                        }
-                    }
-                    if (listShuffleL.Count >= i)
-                    {
-                        for (int iL = 0; iL < listShuffleL[i]; iL++)
-                        {
-                            var shuffleL = queueCutL.Dequeue();
-                            queuePock.Enqueue(shuffleL);
-                        }
-                    }
-                }
+
+                throw ex; 
             }
         }
         public void GetCutOInT()
         {
+            listShuffleL.Clear();
+            listShuffleR.Clear();
             var cut = rd.Next(1, 10);
             var cutL = 0;
             var cutR = 0;
@@ -111,31 +130,38 @@ namespace ConsoleExcavate.service
             cutR = (allNum - cut) / 2;
             cutL = allNum - cutR;
 
-            while (queueCutR.Count < cutR)
+            try
             {
-                queueCutR.Enqueue(queuePock.Dequeue());
-            }
-            while (queueCutL.Count < cutL)
-            {
-                queueCutL.Enqueue(queuePock.Dequeue());
-            }
-            while (queueCutL.Count > cutNum)
-            {
-                var random = rd.Next(1, 5);
-                cutNum += random;
+                while (queueCutR.Count < cutR)
+                {
+                    queueCutR.Enqueue(queuePock.Dequeue());
+                }
+                while (queueCutL.Count < cutL)
+                {
+                    queueCutL.Enqueue(queuePock.Dequeue());
+                }
+                while (queueCutL.Count > cutNum)
+                {
+                    var random = rd.Next(1, 5);
+                    cutNum += random;
 
-                random = cutL - listShuffleL.Sum() < random ? cutL - listShuffleL.Sum() : random;
-                listShuffleL.Add(random);
+                    random = cutL - listShuffleL.Sum() < random ? cutL - listShuffleL.Sum() : random;
+                    listShuffleL.Add(random);
+                }
+
+                cutNum = 0;
+                while (queueCutR.Count > cutNum)
+                {
+                    var random = rd.Next(1, 5);
+                    cutNum += random;
+
+                    random = cutR - listShuffleR.Sum() < random ? cutR - listShuffleR.Sum() : random;
+                    listShuffleR.Add(random);
+                }
             }
-
-            cutNum = 0;
-            while (queueCutR.Count > cutNum)
+            catch (Exception ex)
             {
-                var random = rd.Next(1, 5);
-                cutNum += random;
-
-                random = cutR - listShuffleR.Sum() < random ? cutR - listShuffleR.Sum() : random;
-                listShuffleR.Add(random);
+                throw ex;
             }
         }
 
@@ -146,33 +172,41 @@ namespace ConsoleExcavate.service
             var cutL = rd.Next(1, allNum - cutR - cutC);
             var cutNum = 0;
 
-            while (queuePock.Count > 0)
+            try
             {
-                cutNum++;
-                if (cutNum <= cutR)
+                while (queuePock.Count > 0)
                 {
-                    queueCutR.Enqueue(queuePock.Dequeue());
+                    cutNum++;
+                    if (cutNum <= cutR)
+                    {
+                        queueCutR.Enqueue(queuePock.Dequeue());
+                    }
+                    else if (cutNum <= cutR + cutC)
+                    {
+                        queueCutC.Enqueue(queuePock.Dequeue());
+                    }
+                    else
+                    {
+                        queueCutL.Enqueue(queuePock.Dequeue());
+                    }
                 }
-                else if (cutNum <= cutR + cutC)
+                while (queueCutL.Count > 0)
                 {
-                    queueCutC.Enqueue(queuePock.Dequeue());
+                    queuePock.Enqueue(queueCutL.Dequeue());
                 }
-                else
+                while (queueCutC.Count > 0)
                 {
-                    queueCutL.Enqueue(queuePock.Dequeue());
+                    queuePock.Enqueue(queueCutC.Dequeue());
+                }
+                while (queueCutR.Count > 0)
+                {
+                    queuePock.Enqueue(queueCutR.Dequeue());
                 }
             }
-            while (queueCutL.Count > 0)
+            catch (Exception ex)
             {
-                queuePock.Enqueue(queueCutL.Dequeue());
-            }
-            while (queueCutC.Count > 0)
-            {
-                queuePock.Enqueue(queueCutC.Dequeue());
-            }
-            while (queueCutR.Count > 0)
-            {
-                queuePock.Enqueue(queueCutR.Dequeue());
+
+                throw ex;
             }
         }
 
