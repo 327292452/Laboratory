@@ -3,3 +3,9 @@
 ################################################################################
 
 /MyLibrary/obj
+/Laboratory/ConsoleExcavate/obj
+/Laboratory/Laboratory/obj
+/Laboratory/MyLibrary/obj
+/Laboratory/MyDB/obj
+/ConsoleExcavate/ConsoleExcavate/obj/Debug/netcoreapp3.1
+/ConsoleExcavate/ConsoleExcavate/obj/Release/netcoreapp3.1
