@@ -1,0 +1,8 @@
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\obj\Debug\netstandard2.1\MyDB.AssemblyInfoInputs.cache
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\obj\Debug\netstandard2.1\MyDB.AssemblyInfo.cs
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\obj\Debug\netstandard2.1\MyDB.csproj.CoreCompileInputs.cache
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\bin\Debug\netstandard2.1\MyDB.deps.json
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\bin\Debug\netstandard2.1\MyDB.dll
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\bin\Debug\netstandard2.1\MyDB.pdb
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\obj\Debug\netstandard2.1\MyDB.dll
+E:\Data\Job_Data\NET\MyLob\Laboratory\MyDB\obj\Debug\netstandard2.1\MyDB.pdb

@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "vT3mC8B7rEp89U+sJnTpAnPV2mTPzB9jL7pOQ8dSjWDvl7uBvWNjyTytmJWY3WeCPNhCNk+b8VXKljeDqq1O5g==",
+  "success": true,
+  "projectFilePath": "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\MyLibrary\\MyLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sup\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1000\\microsoft.office.interop.excel.15.0.4795.1000.nupkg.sha512",
+    "C:\\Users\\sup\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
+    "C:\\Users\\sup\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用“.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8”而不是项目目标框架“.NETStandard,Version=v2.1”还原包“Microsoft.Office.Interop.Excel 15.0.4795.1000”。此包可能与项目不完全兼容。",
+      "libraryId": "Microsoft.Office.Interop.Excel",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    }
+  ]
+}
