@@ -12,3 +12,7 @@
 /Laboratory/CharDB/bin/Debug/netstandard2.1
 /Laboratory/CharService/obj
 /Laboratory/CharSimpleWeb/bin
+/Laboratory/packages
+/Laboratory/Word.WinForm/bin/Debug
+/Laboratory/Word.WinForm/obj/Debug
+/Laboratory/Word.Services/obj
