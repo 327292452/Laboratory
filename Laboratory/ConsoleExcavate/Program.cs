@@ -301,6 +301,16 @@ namespace ConsoleExcavate
                     string context = string.Empty;
                     DZPockService service = new DZPockService();
                     var eq = service.OprationShuffle();
+
+
+                    Console.Write("P:");
+                    var p = Console.ReadLine();
+                    Console.Write("S:");
+                    var s = Console.ReadLine();
+
+                    service.CreatePockRoom(int.Parse(p), int.Parse(s));
+
+
                     var allCount = eq.Count;
                     for (int i = 0; i < allCount; i++)
                     {

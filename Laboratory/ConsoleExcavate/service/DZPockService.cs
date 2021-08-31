@@ -18,6 +18,7 @@ namespace ConsoleExcavate.service
         private Queue<DZPockModule> queueCutR;
         private List<int> listShuffleL = new List<int>();
         private List<int> listShuffleR = new List<int>();
+        private List<string> listPersonName = new List<string>();
 
         Dictionary<int, PersonModule> dicDerson = new Dictionary<int, PersonModule>();
         Random rd = new Random();
@@ -115,7 +116,7 @@ namespace ConsoleExcavate.service
             catch (Exception ex)
             {
 
-                throw ex; 
+                throw ex;
             }
         }
         public void GetCutOInT()
@@ -223,6 +224,21 @@ namespace ConsoleExcavate.service
                 queuePock.Enqueue(new DZPockModule { Col = 2, Num = i });
                 queuePock.Enqueue(new DZPockModule { Col = 1, Num = i });
             }
+            GetPersonName();
+        }
+
+        private void GetPersonName()
+        {
+            listPersonName.Add("赵一");
+            listPersonName.Add("李二");
+            listPersonName.Add("张三");
+            listPersonName.Add("钱四");
+            listPersonName.Add("王五");
+            listPersonName.Add("李六");
+            listPersonName.Add("朱七");
+            listPersonName.Add("陈八");
+            listPersonName.Add("郑九");
+            listPersonName.Add("贾十");
         }
         #endregion
 
@@ -237,9 +253,9 @@ namespace ConsoleExcavate.service
                 {
                     var q = queuePock.Dequeue();
 
-                    if (dicDerson[i + 1].State)
+                    if (dicDerson[i].State)
                     {
-                        dicDerson[i + 1].HandPock.Add(new DZPockModule { Col = q.Col, Num = q.Num });
+                        dicDerson[i].HandPock.Add(new DZPockModule { Col = q.Col, Num = q.Num });
                         //
                     }
                 }
@@ -272,6 +288,11 @@ namespace ConsoleExcavate.service
         {
             RoomPersonNumAll = personNum;
             CapitalAll = capitalAll;
+
+            for (int i = 0; i < personNum; i++)
+            {
+                AddPerson(i, listPersonName[i]);
+            }
         }
         public void AddPerson(int code, string name)
         {
