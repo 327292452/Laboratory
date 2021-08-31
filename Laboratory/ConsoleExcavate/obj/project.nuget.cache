@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DynE0uXPs4v/eDQChfYGGv261PO2nMgYRvXXCCkkaGhu9neXG8xpPzXJQjU1a20LU4V5hPIgxW+I0X+L3Qc7Yg==",
+  "dgSpecHash": "tg+Fu+LAbihrVGURU41JiR8xTvfFhe4YX3PCy6TeUUE+wq4swuN0ZRGLMPwwv2Exkwn9Yi7EEvh9rvM5eeuUjg==",
   "success": true,
   "projectFilePath": "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\ConsoleExcavate\\ConsoleExcavate.csproj",
   "expectedPackageFiles": [
@@ -106,7 +106,8 @@
     "C:\\Users\\sup\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\sup\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\sup\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\sup\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\sup\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\sup\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],
   "logs": [
     {

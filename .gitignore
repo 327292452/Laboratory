@@ -2,10 +2,17 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
-/MyLibrary/obj
-/Laboratory/ConsoleExcavate/obj
-/Laboratory/Laboratory/obj
-/Laboratory/MyLibrary/obj
-/Laboratory/MyDB/obj
-/ConsoleExcavate/ConsoleExcavate/obj/Debug/netcoreapp3.1
-/ConsoleExcavate/ConsoleExcavate/obj/Release/netcoreapp3.1
+/Laboratory/CharDB/obj
+/Laboratory/CharModule/obj
+/Laboratory/CharSimpleWeb/obj
+/Laboratory/CharSimpleWeb/bin/Debug/net5.0
+/Laboratory/CharWebApi/bin/Debug/net5.0
+/Laboratory/CharWebApi/obj
+/Laboratory/ConsoleChar/obj
+/Laboratory/CharDB/bin/Debug/netstandard2.1
+/Laboratory/CharService/obj
+/Laboratory/CharSimpleWeb/bin
+/Laboratory/packages
+/Laboratory/Word.WinForm/bin/Debug
+/Laboratory/Word.WinForm/obj/Debug
+/Laboratory/Word.Services/obj
