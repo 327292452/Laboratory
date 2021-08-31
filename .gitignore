@@ -3,3 +3,12 @@
 ################################################################################
 
 /Laboratory/CharDB/obj
+/Laboratory/CharModule/obj
+/Laboratory/CharSimpleWeb/obj
+/Laboratory/CharSimpleWeb/bin/Debug/net5.0
+/Laboratory/CharWebApi/bin/Debug/net5.0
+/Laboratory/CharWebApi/obj
+/Laboratory/ConsoleChar/obj
+/Laboratory/CharDB/bin/Debug/netstandard2.1
+/Laboratory/CharService/obj
+/Laboratory/CharSimpleWeb/bin

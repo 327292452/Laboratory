@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="/js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript">
+        var info = {
+            UserGUID: "15547ED0-43C3-48B1-88A6-331F72E02B32",
+        }
+        var parame = {
+            Type: 2,
+            Data: {
+                TagetrGUID: "15547ED0-43C3-48B1-88A6-331F72E02B32",
+                CharMessage: {
+                    UserGUID: "15547ED0-43C3-48B1-88A6-331F72E02B32",
+                    Type: 1,
+                    Message: ""
+                }
+            }
+        }
+        $(function() {
+            WebSocketTest();
+            $("#send").on("click", function() {
+                var msg = $("#letter").val();
+                if (msg.length > 0) {
+                    parame.Data.CharMessage.Type = 1;
+                    parame.Data.CharMessage.Message = msg;
+                    var jsonStr = JSON.stringify(parame);
+                    ws.send(jsonStr);
+                }
+            });
+            $("#sendFile").on("click", function() {   
+                var file = file.files[0];   
+                var reader = new FileReader();   
+                reader.readAsDataURL(file);   
+                reader.onload = function(e) {     
+                    var pic = document.getElementById("preview");     
+                    pic.src = this.result;   
+                }
+            });
+        });
+        // var ws = new WebSocket("ws://127.0.0.1:14001/alone/?UserGUID="+parame.Data.CharMessage.UserGUID);
+        var ws = new WebSocket("ws://127.0.0.1:14001/alone/" + parame.Data.CharMessage.UserGUID);
+
+        function WebSocketTest() {
+            if ("WebSocket" in window) {
+                //alert("您的浏览器支持 WebSocket!");
+
+                // 打开一个 web socket
+
+                ws.onopen = function() {
+                    // Web Socket 已连接上，使用 send() 方法发送数据
+                    // ws.send("发送数据");
+                    // alert("数据发送中...");
+                    $("#send").removeAttr("disabled");
+                    $(".left>.l-row>.r-u-module>img").attr("src", "/img/portrait-onlie.png")
+                };
+
+                ws.onmessage = function(evt) {
+                    debugger;
+                    var data = JSON.parse(evt.data);
+
+                    switch (data.Code) {
+                        case 0:
+                            if (info.UserGUID.toUpperCase() == data.Result.CharMessage.UserGUID.toUpperCase()) {
+                                switch (data.Result.CharMessage.Type) {
+                                    case 1:
+                                        $(".bulletin").append(Char(data.Result.CharMessage.Message));
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                        break;
+                                }
+                            } else {
+                                $(".bulletin").append(Char(data.Result.CharMessage.Message));
+                            }
+                            break;
+                        case 1:
+                            alert(data.Msg);
+                            break;
+                    }
+
+                };
+
+                ws.onclose = function() {
+                    // 关闭 websocket
+                    $("#send").attr("disabled", "disabled");
+                    $(".left>.l-row>.r-u-module>img").attr("src", "/img/portrait-unonlie.png")
+                };
+            } else {
+                // 浏览器不支持 WebSocket
+                alert("您的浏览器不支持 WebSocket!");
+            }
+        }
+
+        function Char(msg) {
+            var dl = $("<dl></dl>");
+            dl.append('<img src="/img/portrait-unonlie.png">');
+            var dl_span = $("<span></span>");
+            dl_span.append(msg);
+            dl.append(dl_span);
+            return dl;
+        }
+
+        function Char(msg) {
+            var dl = $("<dl></dl>");
+            var dl_span = $("<span></span>");
+            dl_span.append(msg);
+            dl.append(dl_span);
+            dl.append('<img src="/img/portrait-unonlie.png">');
+            return dl;
+        }
+    </script>
+    <style>
+        div {
+            border: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chatroom {
+            width: 480px;
+            height: 520px;
+            margin: 0 auto;
+            background: rgb(250, 255, 180);
+            display: flex;
+        }
+
+            .chatroom .left {
+                width: 28%;
+                height: 100%;
+                background: rgb(255, 206, 229);
+            }
+
+            .chatroom .right {
+                width: 72%;
+                height: 100%;
+                background: rgb(252, 207, 207);
+            }
+
+            .chatroom .left .l-row {
+                height: 32px;
+                width: 100%;
+            }
+
+            .chatroom .right .r-row {
+                height: 32px;
+                width: 100%;
+            }
+
+        .r-u-module {
+            height: 100%;
+            width: 100%;
+            background: rgb(255, 255, 255);
+            display: flex;
+        }
+
+            .r-u-module img {
+                height: 100%;
+            }
+
+            .r-u-module span {
+                display: block;
+                line-height: 50%;
+            }
+
+        .chat {
+            height: 100%;
+            background: rgb(255, 255, 255);
+        }
+
+        .bulletin {
+            height: 80%;
+            background: rgb(255, 219, 219);
+            overflow-y: auto;
+        }
+
+        .epistolize {
+            height: 20%;
+            background: rgb(255, 219, 219);
+        }
+
+        dl {
+            display: flex;
+            width: "100%";
+            height: "32px";
+            padding: 0 15px;
+        }
+
+            dl img {
+                display: block;
+                height: 23px;
+            }
+
+            dl span {
+                display: block;
+                margin: 0 20px 0;
+            }
+
+        di {
+            height: 100%;
+            width: 100%;
+        }
+
+            di textarea {
+                width: 100%;
+                height: 100%;
+                resize: none;
+            }
+
+            di #send {
+                width: 120px;
+                height: 32px;
+            }
+
+            di #sendFile {
+                width: 32px;
+                height: 32px;
+            }
+
+            di .divtext {
+                width: 100%;
+                height: 80%;
+            }
+
+            di .divbutton {
+                width: 100%;
+                height: 20%;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="chatroom">
+        <div class="left">
+            <div class="l-row">
+                <div class="r-u-module">
+                    <img src="/img/portrait-unonlie.png">
+                    <span>cyy</span>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="chat">
+                <div class="bulletin">
+                    <dl>
+                        <img src="/img/portrait-unonlie.png">
+                        <span>你好！</span>
+                    </dl>
+                </div>
+                <div class="epistolize">
+                    <di>
+                        <div class="divtext"><textarea type="text" id="letter"></textarea></div>
+                        <div class="divbutton"><input type="button" id="send" value="发送" disabled="false" /><input type="button" id="sendFile" value="+" disabled="false" /></div>
+                    </di>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
