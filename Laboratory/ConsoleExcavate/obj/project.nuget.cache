@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c/MonPnPL+Q5czlkqIbzueRQ+EIJOpOF8/PWxyQQjn2TmsazbEjbAHtdkkm+cqpEgmIDVQUBwoY1oCfBmvXJ7Q==",
+  "dgSpecHash": "l55VdM4mbAt++racXjyrqsevC8fYcl6Q1H7sFpwbtIRjerV0XisVoDZugzJ7F+7hBr6PgWfvlg3dx+UPmwfdPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sup_vm\\source\\repos\\TIIO\\Laboratory\\Laboratory\\ConsoleExcavate\\ConsoleExcavate.csproj",
+  "projectFilePath": "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\ConsoleExcavate\\ConsoleExcavate.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sup\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\sup\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",

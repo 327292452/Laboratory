@@ -11,7 +11,8 @@
           "Microsoft.Extensions.Configuration": "5.0.0",
           "Microsoft.Extensions.DependencyInjection": "5.0.2",
           "MyDB": "1.0.0",
-          "MyLibrary": "1.0.0"
+          "MyLibrary": "1.0.0",
+          "Serilog": "2.10.0"
         },
         "runtime": {
           "ConsoleExcavate.dll": {}
