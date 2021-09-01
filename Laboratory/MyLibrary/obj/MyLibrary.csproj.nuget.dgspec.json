@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\MyLibrary\\MyLibrary.csproj": {}
+    "C:\\Users\\sup_vm\\source\\repos\\TIIO\\Laboratory\\Laboratory\\MyLibrary\\MyLibrary.csproj": {}
   },
   "projects": {
-    "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\MyLibrary\\MyLibrary.csproj": {
+    "C:\\Users\\sup_vm\\source\\repos\\TIIO\\Laboratory\\Laboratory\\MyLibrary\\MyLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\MyLibrary\\MyLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\sup_vm\\source\\repos\\TIIO\\Laboratory\\Laboratory\\MyLibrary\\MyLibrary.csproj",
         "projectName": "MyLibrary",
-        "projectPath": "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\MyLibrary\\MyLibrary.csproj",
-        "packagesPath": "C:\\Users\\sup\\.nuget\\packages\\",
-        "outputPath": "E:\\Data\\Job_Data\\NET\\MyLob\\Laboratory\\MyLibrary\\obj\\",
+        "projectPath": "C:\\Users\\sup_vm\\source\\repos\\TIIO\\Laboratory\\Laboratory\\MyLibrary\\MyLibrary.csproj",
+        "packagesPath": "C:\\Users\\sup_vm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sup_vm\\source\\repos\\TIIO\\Laboratory\\Laboratory\\MyLibrary\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\sup\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sup_vm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +25,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://10.168.1.97/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
