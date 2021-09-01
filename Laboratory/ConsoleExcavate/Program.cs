@@ -1,5 +1,6 @@
 ﻿using ConsoleExcavate.controller;
 using ConsoleExcavate.service;
+using Microsoft.Extensions.Configuration;
 using MyDB.MSSQL.Services;
 using MyDB.MYSQL.Services;
 using MyLibrary.Consciousness;
@@ -7,6 +8,7 @@ using MyLibrary.SUPTools.EMail;
 using MyLibrary.Utile.PLog;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace ConsoleExcavate
 {
     class Program
     {
+
         private static string config_p = "C:\\Users\\ZC-024\\Desktop\\config.lab";
         private static string data_p = "C:\\Users\\ZC-024\\Desktop\\data2.txt";
         private static string data_e = "C:\\Users\\ZC-024\\Desktop\\data_result.xlsx";
@@ -284,8 +287,11 @@ namespace ConsoleExcavate
         }
         private static void GetQueryInfo()
         {
-            TestService service = new TestService();
-            MService mService = new MService();
+
+            var conneMySql = ConfigurationManager.AppSettings["mysqlTest"].ToString();
+            var conneMS = ConfigurationManager.AppSettings["msTest"].ToString();
+            TestDBService service = new TestDBService(conneMS);
+            MService mService = new MService(conneMySql);
             //service.GetDBContext();
             mService.GetDBContext();
         }
@@ -304,11 +310,12 @@ namespace ConsoleExcavate
 
 
                     Console.Write("P:");
-                    var p = Console.ReadLine();
+                    var pn = Console.ReadLine();
                     Console.Write("S:");
-                    var s = Console.ReadLine();
+                    var sa = Console.ReadLine();
 
-                    service.CreatePockRoom(int.Parse(p), int.Parse(s));
+                    service.CreatePockRoom(int.Parse(pn), int.Parse(sa));
+                    service.GetPockAssign();
 
 
                     var allCount = eq.Count;

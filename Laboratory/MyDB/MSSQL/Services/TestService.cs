@@ -3,13 +3,13 @@ using System;
 
 namespace MyDB.MSSQL.Services
 {
-    public class TestService
+    public class TestDBService
     {
         Microsoft.Extensions.Options.IOptionsMonitor<AppSettings> appSettings;
         TestContext context;
-        public TestService()
+        public TestDBService(string connection)
         {
-            context = new TestContext("10.168.1.68\\sql2008;database=NBJC;uid=sa;pwd=fuqing68+++;Pooling='true';Min Pool Size=3;");
+            context = new TestContext(connection);
         }
         public void GetDBContext()
         {

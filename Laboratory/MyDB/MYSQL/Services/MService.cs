@@ -9,9 +9,9 @@ namespace MyDB.MYSQL.Services
     public class MService
     {
         MYContext context;
-        public MService()
+        public MService(string connection)
         {
-            context = new MYContext("Database=test;Data Source=localhost;Port=3306;User Id=root;Password=Password@1;Allow User Variables=true;default command timeout=120;Pooling=true;Max Pool Size=1000;SslMode=none;");
+            context = new MYContext(connection);
         }
         public void GetDBContext()
         {
