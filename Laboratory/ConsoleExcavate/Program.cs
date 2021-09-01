@@ -298,38 +298,65 @@ namespace ConsoleExcavate
         private static void GetPock()
         {
             ProcessLog log = new ProcessLog("pockLog\\");
+
+            var pn = "7";
+            var sa = "1000";
+            List<string> list = new List<string>();
+            string context = string.Empty;
+            DZPockService service = new DZPockService();
+            //service.showPock();
+            var eq = service.OprationShuffle();
+            service.CreatePockRoom(int.Parse(pn), int.Parse(sa));
+
             while (true)
             {
                 try
                 {
+
                     log.Logger.Debug("Staret.......");
-                    List<string> list = new List<string>();
-                    string context = string.Empty;
-                    DZPockService service = new DZPockService();
-                    var eq = service.OprationShuffle();
+                    //Console.Write("P:");
+                    //var pn = Console.ReadLine();
+                    //Console.Write("S:");
+                    //var sa = Console.ReadLine();
 
+                    Console.WriteLine(string.Format("P:{0}  S:{1}", pn, sa));
 
-                    Console.Write("P:");
-                    var pn = Console.ReadLine();
-                    Console.Write("S:");
-                    var sa = Console.ReadLine();
-
-                    service.CreatePockRoom(int.Parse(pn), int.Parse(sa));
                     service.GetPockAssign();
+                    service.showHandPock();
 
-
-                    var allCount = eq.Count;
-                    for (int i = 0; i < allCount; i++)
+                    var comnum = 5;
+                    do
                     {
-                        var p = eq.Dequeue();
-                        context += p.Num + "-" + p.Col + "\t";
-                        if ((i + 1) % 13 == 0)
+                        comnum--;
+                        for (int i = 0; i < int.Parse(pn); i++)
                         {
-                            Console.WriteLine(context);
-                            context = string.Empty;
+                            service.BidPock(i, 1, 50);
                         }
+                    } while (comnum > 0);
+                    service.showComPock();
+                    service.GetCapitall();
+                    service.RecyclePock();
+
+
+                    //var allCount = eq.Count;
+                    //for (int i = 0; i < allCount; i++)
+                    //{
+                    //    var p = eq.Dequeue();
+                    //    context += p.Num + "-" + p.Col + "\t";
+                    //    if ((i + 1) % 13 == 0)
+                    //    {
+                    //        Console.WriteLine(context);
+                    //        context = string.Empty;
+                    //    }
+                    //}
+                    if (Console.ReadLine().ToUpper() == "CLOSE")
+                    {
+                        break;
                     }
-                    if (Console.ReadLine().ToUpper() == "CLOSE") break;
+                    else
+                    {
+                        Console.WriteLine("==========================================================================");
+                    }
                 }
                 catch (Exception ex)
                 {
