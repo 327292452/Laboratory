@@ -321,22 +321,10 @@ namespace ConsoleExcavate
 
                     Console.WriteLine(string.Format("P:{0}  S:{1}", pn, sa));
 
-                    service.GetPockAssign();
-                    service.showHandPock();
-
-                    var comnum = 5;
-                    do
-                    {
-                        comnum--;
-                        for (int i = 0; i < int.Parse(pn); i++)
-                        {
-                            service.BidPock(i, 1, 50);
-                        }
-                    } while (comnum > 0);
+                    service.PlayPock();
                     service.showComPock();
                     service.GetCapitall();
                     service.RecyclePock();
-
 
                     //var allCount = eq.Count;
                     //for (int i = 0; i < allCount; i++)

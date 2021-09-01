@@ -28,7 +28,6 @@ namespace ConsoleExcavate.service
         private int RoomPersonNumNow = 0;
         private int CapitalAll = 0;
 
-        private int Wheel = 0;
         public DZPockService()
         {
             GetPockInit();
@@ -256,21 +255,7 @@ namespace ConsoleExcavate.service
             listPersonName.Add("贾十");
         }
 
-
-        private void AddPerson(int code, string name)
-        {
-            dicDerson.Add(RoomPersonNumNow, new PersonModule { Code = code, Name = name, Capitall = CapitalAll, RoundNum = 1, State = true });
-            RoomPersonNumNow += 1;
-        }
-        private void AddCapitall(int id)
-        {
-            dicDerson[id].Capitall += CapitalAll;
-            dicDerson[id].RoundNum += 1;
-        }
-        #endregion
-
-        #region 外执行
-        public void GetPockAssign()
+        private void GetPockAssign()
         {
             var handPNum = 0;
 
@@ -291,72 +276,7 @@ namespace ConsoleExcavate.service
             }
         }
 
-        public void showHandPock()
-        {
-            dicDerson.ToList().ForEach(f =>
-            {
-                string handPock = string.Empty;
-                f.Value.HandPock.ForEach(hp =>
-                {
-                    handPock += string.Format("{0}-{1}  ", hp.Num, hp.Col);
-                });
-                Console.WriteLine(string.Format("{0}:{1}", f.Value.Name, handPock));
-            });
-        }
-        public void showPock()
-        {
-            List<DZPockModule> list = new List<DZPockModule>();
-            string handPock = string.Empty;
-
-            queuePock.ToList().ForEach(f =>
-            {
-                list.Add(f);
-            });
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                handPock += string.Format("{0}-{1}  ", list[i].Num, list[i].Col);
-
-                if ((i + 1) % 13 == 0)
-                {
-                    Console.WriteLine(string.Format("{0}    ", handPock));
-                    handPock = string.Empty;
-                }
-            }
-        }
-        public void showComPock()
-        {
-            listCom.ForEach(f =>
-            {
-                string handPock = string.Empty;
-
-                handPock += string.Format("{0}-{1}  ", f.Num, f.Col);
-
-                Console.Write(string.Format("{0}", handPock));
-            });
-        }
-
-        public void PlayPock()
-        {
-            GetPockAssign();
-
-            while (Wheel < RoomPersonNumAll)
-            {
-                Wheel++;
-            }
-
-        }
-        public void CreatePockRoom(int personNum, int capitalAll)
-        {
-            RoomPersonNumAll = personNum;
-            CapitalAll = capitalAll;
-
-            for (int i = 0; i < personNum; i++)
-            {
-                AddPerson(i, listPersonName[i]);
-            }
-        }
-        public void BidPock(int id, int type, int tally)
+        private void BidPock(int id, int type, int tally)
         {
             try
             {
@@ -393,6 +313,92 @@ namespace ConsoleExcavate.service
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        private void AddPerson(int code, string name)
+        {
+            dicDerson.Add(RoomPersonNumNow, new PersonModule { Code = code, Name = name, Capitall = CapitalAll, RoundNum = 1, State = true });
+            RoomPersonNumNow += 1;
+        }
+        private void AddCapitall(int id)
+        {
+            dicDerson[id].Capitall += CapitalAll;
+            dicDerson[id].RoundNum += 1;
+        }
+        private void showPock()
+        {
+            List<DZPockModule> list = new List<DZPockModule>();
+            string handPock = string.Empty;
+
+            queuePock.ToList().ForEach(f =>
+            {
+                list.Add(f);
+            });
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                handPock += string.Format("{0}-{1}  ", list[i].Num, list[i].Col);
+
+                if ((i + 1) % 13 == 0)
+                {
+                    Console.WriteLine(string.Format("{0}    ", handPock));
+                    handPock = string.Empty;
+                }
+            }
+        }
+        private void showHandPock()
+        {
+            dicDerson.ToList().ForEach(f =>
+            {
+                string handPock = string.Empty;
+                f.Value.HandPock.ForEach(hp =>
+                {
+                    handPock += string.Format("{0}-{1}  ", hp.Num, hp.Col);
+                });
+                Console.WriteLine(string.Format("{0}:{1}", f.Value.Name, handPock));
+            });
+        }
+        #endregion
+
+        #region 外执行
+
+        public void showComPock()
+        {
+            listCom.ForEach(f =>
+            {
+                string handPock = string.Empty;
+
+                handPock += string.Format("{0}-{1}  ", f.Num, f.Col);
+
+                Console.Write(string.Format("{0}", handPock));
+            });
+        }
+
+        public void PlayPock()
+        {
+            GetPockAssign();
+            showPock();
+            showHandPock();
+
+            var comnum = 5;
+            do
+            {
+                comnum--;
+                for (int i = 0; i < RoomPersonNumAll; i++)
+                {
+                    BidPock(i, 1, 10);
+                }
+            } while (comnum > 0);
+
+        }
+        public void CreatePockRoom(int personNum, int capitalAll)
+        {
+            RoomPersonNumAll = personNum;
+            CapitalAll = capitalAll;
+
+            for (int i = 0; i < personNum; i++)
+            {
+                AddPerson(i, listPersonName[i]);
             }
         }
         public void GetCapitall()
