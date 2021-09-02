@@ -9,11 +9,11 @@ namespace ConsoleExcavate.controller
 {
     public class MyRequest
     {
-        public static void GetInfo(string url)
+        public static string GetInfo(string url)
         {
             IStructure structure = new HttpAnalysis();
             //structure.GetHttpSturcture(GetRequest.Get(url));
-            Task resultAsyncGet = GetRequest.AsyncGet(url);
+            return GetRequest.AsyncGet(url).Result;
         }
 
         public static void PostInfo(string url, string parame)

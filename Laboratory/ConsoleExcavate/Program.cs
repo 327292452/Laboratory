@@ -38,6 +38,7 @@ namespace ConsoleExcavate
                 //NerveState();
                 //TestController.TestLinq();
                 //RequestHTML();
+                RequestUrl();
                 //GetDynamicModel.BtnQuery();
                 //GetAsyncAwiait.MyMain();
                 //RWTxt();
@@ -49,7 +50,7 @@ namespace ConsoleExcavate
                 //GetAsync();
                 //GetQuery();
                 //GetPock();
-                GetWork();
+                //GetWork();
             }
             catch (Exception ex)
             {
@@ -90,6 +91,18 @@ namespace ConsoleExcavate
             //    }
             //}
             HtmlController.PostHtmlStructrue("", "");
+        }
+        private static void RequestUrl()
+        {
+            try
+            {
+                var result = MyRequest.GetInfo("https://hanyu.baidu.com/zici/s?wd=");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
         private static void RWTxt()
         {

@@ -56,26 +56,25 @@ namespace ConsoleExcavate.controller
             return "";
         }
         static readonly HttpClient client = new HttpClient();
-        public static async Task AsyncGet(string url)
+        public static async Task<string> AsyncGet(string url)
         {
+            string responseBody = string.Empty;
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
+                responseBody = await response.Content.ReadAsStringAsync();
 
                 //Above three lines can be replaced with new helper method below
                 //string responseBody = await client.GetStringAsync(url);
-
-                Console.WriteLine(responseBody);
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
             }
-
+            return responseBody;
         }
 
         public static async Task<string> AsyncPost(string url, string jsonParame)

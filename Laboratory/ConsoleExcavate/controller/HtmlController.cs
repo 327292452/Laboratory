@@ -23,8 +23,9 @@ namespace ConsoleExcavate.controller
             //if (string.IsNullOrEmpty(url)) return;
             //MyRequest.PostInfo(url, parame);
             //GetUrl("http://hq.sinajs.cn/list=");
-            GetUrlAll("http://hq.sinajs.cn/list=");
-            GetData(url);
+            //GetUrlAll("http://hq.sinajs.cn/list="); 
+            GetUrlAll("https://hanyu.baidu.com/zici/s?wd=%E6%88%91&query=%E6%88%91&srcid=28232&from=kg0"); 
+            //GetData(url);
         }
         private static string GetUrl(string url)
         {

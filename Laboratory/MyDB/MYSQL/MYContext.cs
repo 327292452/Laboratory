@@ -49,6 +49,27 @@ namespace MyDB.MYSQL
         public string work { get; set; }
         public string pinyin { get; set; }
         public int tone { get; set; }
+        /// <summary>
+        /// 类别（0：简；1:繁）
+        /// </summary>
+        public int type { get; set; }
+        /// <summary>
+        /// 笔画
+        /// </summary>
+        public int step { get; set; }
+        /// <summary>
+        /// 部首
+        /// </summary>
+        public int radical { get; set; }
         public int seq { get; set; }
+    }
+    [Table("workbankinfo")]
+    public class WorkBankInfo
+    {
+        [Key]
+        public int id { get; set; }
+        public string workbankid { get; set; }
+        public string pinyin { get; set; }
+        public int tone { get; set; }
     }
 }
