@@ -2,6 +2,7 @@
 using ConsoleExcavate.service;
 using Microsoft.Extensions.Configuration;
 using MyDB.MSSQL.Services;
+using MyDB.MYSQL;
 using MyDB.MYSQL.Services;
 using MyLibrary.Consciousness;
 using MyLibrary.SUPTools.EMail;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -360,7 +362,7 @@ namespace ConsoleExcavate
         {
             IFileOption service = new FileOption();
             WorkBankService dbContent = new WorkBankService();
-            List<string> list = new List<string>();
+            List<WorkBank> list = new List<WorkBank>();
             string content = string.Empty;
             var num = 0;
             for (int i = 129; i < 256; i++)
@@ -399,16 +401,17 @@ namespace ConsoleExcavate
                     num++;
 
                     byte[] data = new byte[] { (byte)i, (byte)ti };
+                    var id = (data[0] << 8) + data[1];
                     var work = Encoding.GetEncoding("GB2312").GetString(data);
-                    if (!work.Equals("?") && work != "")
+                    if (!work.Equals("?"))
                     {
-                        list.Add(string.Format("{0}:{1} {2}", i, ti, work + "\r\n"));
-                        //list.Add(work);
+                        //list.Add(new WorkBank { id = id, work = string.Format("{0}:{1} {2}", i, ti, work + "\r\n"), pinyin = "", tone = 0, seq = num });
+                        list.Add(new WorkBank { id = id, work = work, pinyin = "", tone = 0, seq = num });
                     }
                 }
             }
-            service.FileWrite(string.Format(@"C:\Users\sup\Desktop\{0}.txt", DateTime.Now.Ticks), list);
-            //dbContent.AddWork(list);
+            //service.FileWrite(string.Format(@"C:\Users\sup\Desktop\{0}.txt", DateTime.Now.Ticks), list.Select(s => s.work).ToList());
+            dbContent.AddWork(list);
         }
     }
 }
