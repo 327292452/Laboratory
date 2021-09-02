@@ -14,6 +14,7 @@ namespace MyDB.MYSQL
         /// 机构部门
         /// </summary>
         public DbSet<Test> Tests { get; set; }
+        public DbSet<WorkBank> WorkBanks { get; set; }
 
 
         public MYContext(string connectionString)
@@ -29,10 +30,18 @@ namespace MyDB.MYSQL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Test>();
+            modelBuilder.Entity<WorkBank>();
         }
     }
     [Table("test")]
     public class Test
+    {
+        [Key]
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+    [Table("workbank")]
+    public class WorkBank
     {
         [Key]
         public int id { get; set; }

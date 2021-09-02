@@ -5,6 +5,8 @@ using MyDB.MSSQL.Services;
 using MyDB.MYSQL.Services;
 using MyLibrary.Consciousness;
 using MyLibrary.SUPTools.EMail;
+using MyLibrary.Utile;
+using MyLibrary.Utile.IO;
 using MyLibrary.Utile.PLog;
 using System;
 using System.Collections.Generic;
@@ -44,7 +46,8 @@ namespace ConsoleExcavate
                 //GetAsyncAwaiat();
                 //GetAsync();
                 //GetQuery();
-                GetPock();
+                //GetPock();
+                GetWork();
             }
             catch (Exception ex)
             {
@@ -352,6 +355,61 @@ namespace ConsoleExcavate
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
+        }
+        private static void GetWork()
+        {
+            IFileOption service = new FileOption(); ;
+            List<string> list = new List<string>();
+            string content = string.Empty;
+            var num = 0;
+            for (int i = 129; i < 256; i++)
+            {
+                if (i == 169) continue;//特殊符号
+                if (i == 168) continue;//特殊符号
+                if (i == 167) continue;//特殊符号
+                if (i == 166) continue;//特殊符号
+                if (i == 162) continue;//特殊符号
+                if (i == 161) continue;//数学符号
+
+                if (i == 165) continue;//日文
+                if (i == 164) continue;//日文
+
+                if (i == 163) continue;//英文符号
+                for (int ti = 64; ti < 256; ti++)
+                {
+
+                    if (i == 255) break;
+                    if (i == 254 && ti == 161) break;
+                    if (i == 253 && ti == 161) break;
+                    if (i == 252 && ti == 161) break;
+                    if (i == 251 && ti == 161) break;
+                    if (i == 250 && ti == 161) break;
+                    if (i == 249 && ti == 161) break;
+                    if (i == 248 && ti == 161) break;
+                    if (i == 175 && ti == 161) break;
+                    if (i == 174 && ti == 161) break;
+                    if (i == 173 && ti == 161) break;
+                    if (i == 172 && ti == 161) break;
+                    if (i == 171 && ti == 161) break;
+                    if (i == 170 && ti == 161) break;
+                    num++;
+
+                    byte[] data = new byte[] { (byte)i, (byte)ti };
+                    var work = Encoding.GetEncoding("GB2312").GetString(data);
+                    if (!work.Equals("?") && work != "")
+                    {
+                        list.Add(string.Format("{0}:{1} {2}", i, ti, work + "\r\n"));
+                    }
+                    //content += work;
+                    //if (num % 255 == 0)
+                    //{
+                    //    list.Add(content);
+                    //    content = string.Empty;
+                    //}
+                    //Console.Write(string.Format("{0}:{1} {2}    ", i, ti, work));
+                }
+            }
+            service.FileWrite(string.Format(@"C:\Users\sup\Desktop\{0}.txt", DateTime.Now.Ticks), list);
         }
     }
 }

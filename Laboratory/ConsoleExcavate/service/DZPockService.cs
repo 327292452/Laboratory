@@ -377,7 +377,7 @@ namespace ConsoleExcavate.service
         public void PlayPock()
         {
             GetPockAssign();
-            showPock();
+            //showPock();
             showHandPock();
 
             var comnum = 5;

@@ -107,5 +107,45 @@ namespace MyLibrary.Utile.IO
             {
             }
         }
+
+        public bool FileWrite(string path, string content)
+        {
+            try
+            {
+                using (Stream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    var byts = Encoding.UTF8.GetBytes(content);
+                    fileStream.Write(byts, 0, content.Length);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return true;
+        }
+
+        public bool FileWrite(string path, List<string> contents)
+        {
+            try
+            {
+                using (Stream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    contents.ForEach(content =>
+                    {
+                        if (!content.Contains("\0"))
+                        {
+                            var byts = Encoding.GetEncoding("GB2312").GetBytes(content);
+                            fileStream.Write(byts, 0, content.Length);
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return true;
+        }
     }
 }

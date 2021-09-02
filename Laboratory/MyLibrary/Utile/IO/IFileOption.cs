@@ -30,6 +30,8 @@ namespace MyLibrary.Utile.IO
         /// <param name="path">文件路径</param>
         /// <returns></returns>
         string FileRead(string path);
+        bool FileWrite(string path, string content);
+        bool FileWrite(string path, List<string> contents);
         /// <summary>
         /// 创建文件
         /// </summary>
