@@ -9,9 +9,9 @@ namespace MyDB.MYSQL.Services
     public class MService
     {
         MYContext context;
-        public MService(string connection)
+        public MService()
         {
-            context = new MYContext(connection);
+            context = new MYContext();
         }
         public void GetDBContext()
         {

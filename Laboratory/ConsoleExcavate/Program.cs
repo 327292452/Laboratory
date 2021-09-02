@@ -294,7 +294,7 @@ namespace ConsoleExcavate
             var conneMySql = ConfigurationManager.AppSettings["mysqlTest"].ToString();
             var conneMS = ConfigurationManager.AppSettings["msTest"].ToString();
             TestDBService service = new TestDBService(conneMS);
-            MService mService = new MService(conneMySql);
+            MService mService = new MService();
             //service.GetDBContext();
             mService.GetDBContext();
         }
@@ -358,12 +358,14 @@ namespace ConsoleExcavate
         }
         private static void GetWork()
         {
-            IFileOption service = new FileOption(); ;
+            IFileOption service = new FileOption();
+            WorkBankService dbContent = new WorkBankService();
             List<string> list = new List<string>();
             string content = string.Empty;
             var num = 0;
             for (int i = 129; i < 256; i++)
             {
+                #region 限制条件
                 if (i == 169) continue;//特殊符号
                 if (i == 168) continue;//特殊符号
                 if (i == 167) continue;//特殊符号
@@ -375,9 +377,10 @@ namespace ConsoleExcavate
                 if (i == 164) continue;//日文
 
                 if (i == 163) continue;//英文符号
+                #endregion  限制条件
                 for (int ti = 64; ti < 256; ti++)
                 {
-
+                    #region  限制条件
                     if (i == 255) break;
                     if (i == 254 && ti == 161) break;
                     if (i == 253 && ti == 161) break;
@@ -392,6 +395,7 @@ namespace ConsoleExcavate
                     if (i == 172 && ti == 161) break;
                     if (i == 171 && ti == 161) break;
                     if (i == 170 && ti == 161) break;
+                    #endregion  限制条件
                     num++;
 
                     byte[] data = new byte[] { (byte)i, (byte)ti };
@@ -399,17 +403,12 @@ namespace ConsoleExcavate
                     if (!work.Equals("?") && work != "")
                     {
                         list.Add(string.Format("{0}:{1} {2}", i, ti, work + "\r\n"));
+                        //list.Add(work);
                     }
-                    //content += work;
-                    //if (num % 255 == 0)
-                    //{
-                    //    list.Add(content);
-                    //    content = string.Empty;
-                    //}
-                    //Console.Write(string.Format("{0}:{1} {2}    ", i, ti, work));
                 }
             }
             service.FileWrite(string.Format(@"C:\Users\sup\Desktop\{0}.txt", DateTime.Now.Ticks), list);
+            //dbContent.AddWork(list);
         }
     }
 }

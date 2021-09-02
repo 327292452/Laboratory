@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 using System.Text;
 
 namespace MyDB.MYSQL
@@ -17,9 +18,9 @@ namespace MyDB.MYSQL
         public DbSet<WorkBank> WorkBanks { get; set; }
 
 
-        public MYContext(string connectionString)
+        public MYContext()
         {
-            _connectionString = connectionString;
+            _connectionString = ConfigurationManager.AppSettings["mysqlTest"].ToString();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,6 +46,9 @@ namespace MyDB.MYSQL
     {
         [Key]
         public int id { get; set; }
-        public string name { get; set; }
+        public string work { get; set; }
+        public string pinyin { get; set; }
+        public int tone { get; set; }
+        public int seq { get; set; }
     }
 }
