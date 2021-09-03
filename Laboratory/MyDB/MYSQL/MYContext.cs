@@ -34,6 +34,7 @@ namespace MyDB.MYSQL
             modelBuilder.Entity<WorkBank>();
         }
     }
+
     [Table("test")]
     public class Test
     {
@@ -47,8 +48,6 @@ namespace MyDB.MYSQL
         [Key]
         public int id { get; set; }
         public string work { get; set; }
-        public string pinyin { get; set; }
-        public int tone { get; set; }
         /// <summary>
         /// 类别（0：简；1:繁）
         /// </summary>
@@ -60,7 +59,7 @@ namespace MyDB.MYSQL
         /// <summary>
         /// 部首
         /// </summary>
-        public int radical { get; set; }
+        public int radicalid { get; set; }
         public int seq { get; set; }
     }
     [Table("workbankinfo")]
