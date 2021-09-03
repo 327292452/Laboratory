@@ -38,7 +38,7 @@ namespace ConsoleExcavate
                 //NerveState();
                 //TestController.TestLinq();
                 //RequestHTML();
-                RequestUrl();
+                //RequestUrl();
                 //GetDynamicModel.BtnQuery();
                 //GetAsyncAwiait.MyMain();
                 //RWTxt();
@@ -49,7 +49,7 @@ namespace ConsoleExcavate
                 //GetAsyncAwaiat();
                 //GetAsync();
                 //GetQuery();
-                //GetPock();
+                GetPock();
                 //GetWork();
             }
             catch (Exception ex)

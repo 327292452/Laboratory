@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using MyLibrary.Utile.PLog;
+using System.Text.RegularExpressions;
 
 namespace ConsoleExcavate.service
 {
@@ -19,14 +20,18 @@ namespace ConsoleExcavate.service
         private List<int> listShuffleL = new List<int>();
         private List<int> listShuffleR = new List<int>();
         private List<string> listPersonName = new List<string>();
+        private List<string> listWinPerson = new List<string>();
 
         Dictionary<int, PersonModule> dicDerson = new Dictionary<int, PersonModule>();
+        Dictionary<int, PersonModule> dicFinal = new Dictionary<int, PersonModule>();
+        Dictionary<string, int> dicScore = new Dictionary<string, int>();
         private List<DZPockModule> listCom = new List<DZPockModule>();
         Random rd = new Random();
 
         private int RoomPersonNumAll = 0;
         private int RoomPersonNumNow = 0;
         private int CapitalAll = 0;
+        private int CapitalDesktop = 0;
 
         public DZPockService()
         {
@@ -269,13 +274,32 @@ namespace ConsoleExcavate.service
                     if (dicDerson[i].State)
                     {
                         dicDerson[i].HandPock.Add(new DZPockModule { Col = q.Col, Num = q.Num });
-                        //
                     }
                 }
                 if (handPNum == 2) break;
             }
         }
+        private void GetWinPorsen()
+        {
+            dicDerson.ToList().ForEach(f =>
+            {
+                if (f.Value.State)
+                {
+                    dicFinal.Add(f.Key, f.Value);
+                }
+            });
 
+            dicFinal.Values.ToList().ForEach(f =>
+            {
+                f.HandPock.AddRange(listCom);
+            });
+
+            dicFinal.ToList().ForEach(f =>
+            {
+                var colEqual = f.Value.HandPock.GroupBy(g => g.Col).Where(w => w.Count() > 5).Count();
+                
+            });
+        }
         private void BidPock(int id, int type, int tally)
         {
             try
@@ -314,6 +338,47 @@ namespace ConsoleExcavate.service
             {
                 throw ex;
             }
+        }
+        public void DealComPock()
+        {
+            Regex reg = new Regex("\\d \\d");
+            dicDerson.ToList().ForEach(f =>
+            {
+                if (f.Value.State)
+                {
+                    var bid = string.Empty;
+                    do
+                    {
+                        Console.Write(string.Format("{0}:", f.Value.Name));
+                        bid = Console.ReadLine();
+                        if (!reg.IsMatch(bid))
+                        {
+                            bid = string.Empty;
+                            continue;
+                        }
+                        var strs = bid.Split(" ");
+
+                        switch (strs[0])
+                        {
+                            case "1":
+                                dicDerson[f.Key].Capitall -= int.Parse(strs[1]);
+                                dicDerson[f.Key].TallyState.Tally = int.Parse(strs[1]);
+                                dicDerson[f.Key].TallyState.State = int.Parse(strs[0]);
+                                CapitalDesktop += int.Parse(strs[1]);
+                                break;
+                            case "2":
+                                dicDerson[f.Key].Capitall -= int.Parse(strs[1]);
+                                dicDerson[f.Key].TallyState.Tally = int.Parse(strs[1]);
+                                dicDerson[f.Key].TallyState.State = int.Parse(strs[0]);
+                                CapitalDesktop += int.Parse(strs[1]);
+                                break;
+                            default:
+                                dicDerson[f.Key].State = false;
+                                break;
+                        }
+                    } while (string.IsNullOrEmpty(bid));
+                }
+            });
         }
         private void AddPerson(int code, string name)
         {
@@ -361,7 +426,6 @@ namespace ConsoleExcavate.service
         #endregion
 
         #region 外执行
-
         public void showComPock()
         {
             listCom.ForEach(f =>
@@ -373,7 +437,6 @@ namespace ConsoleExcavate.service
                 Console.Write(string.Format("{0}", handPock));
             });
         }
-
         public void PlayPock()
         {
             GetPockAssign();
@@ -386,7 +449,8 @@ namespace ConsoleExcavate.service
                 comnum--;
                 for (int i = 0; i < RoomPersonNumAll; i++)
                 {
-                    BidPock(i, 1, 10);
+                    //BidPock(i, 1, 10);
+                    DealComPock();
                 }
             } while (comnum > 0);
 
