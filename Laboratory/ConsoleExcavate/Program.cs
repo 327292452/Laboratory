@@ -38,7 +38,7 @@ namespace ConsoleExcavate
                 //NerveState();
                 //TestController.TestLinq();
                 //RequestHTML();
-                RequestUrl();
+                //RequestUrl();
                 //GetDynamicModel.BtnQuery();
                 //GetAsyncAwiait.MyMain();
                 //RWTxt();
@@ -49,7 +49,7 @@ namespace ConsoleExcavate
                 //GetAsyncAwaiat();
                 //GetAsync();
                 //GetQuery();
-                //GetPock();
+                GetPock();
                 //GetWork();
             }
             catch (Exception ex)
@@ -419,7 +419,7 @@ namespace ConsoleExcavate
                     if (!work.Equals("?"))
                     {
                         //list.Add(new WorkBank { id = id, work = string.Format("{0}:{1} {2}", i, ti, work + "\r\n"), pinyin = "", tone = 0, seq = num });
-                        list.Add(new WorkBank { id = id, work = work, pinyin = "", tone = 0, seq = num });
+                        list.Add(new WorkBank { id = id, work = work, seq = num });
                     }
                 }
             }
